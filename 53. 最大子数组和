@@ -1,0 +1,24 @@
+53. 最大子数组和
+给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+子数组 是数组中的一个连续部分。
+
+直接套用在线处理无法处理都为负数的情况（但其实若都为负数的话，只需要找到最小的那个负数就好了）
+我的代码显然不是最优解（空间和时间复杂度都不是很好）
+
+int maxSubArray(int* nums, int numsSize){
+    int max = 0,tmpt = 0;
+    for(int i = 0; i < numsSize;i++){
+        max += nums[i];
+        if(max < 0) max = 0;
+        else if(max > tmpt) tmpt = max;
+    }
+    if(tmpt == 0){
+        max = nums[0];
+        for(int i = 1; i < numsSize;i++){
+            if(nums[i] > max) max = nums[i];
+        }
+        tmpt = max;
+    }
+
+    return tmpt;
+}
